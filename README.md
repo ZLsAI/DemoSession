@@ -43,3 +43,27 @@ DemoSession/
 ├── webpack.config.js # Webpack configuration
 └── package.json     # Dependencies and scripts
 ```
+
+## API Routes
+
+### GET /test
+Returns a JSON response with a greeting message.
+
+**Response:**
+```json
+{
+    "message": "Hello from test route",
+    "timestamp": "2026-01-17T16:30:00.000Z",
+    "source": "Azure Session Pool",
+    "status": "success"
+}
+```
+
+### POST /test
+Echoes back the request body.
+
+**Request Body:** Any JSON object
+**Response:** The received data plus metadata
+
+---
+*Route created via Azure Session Pool on 2026-01-17*
