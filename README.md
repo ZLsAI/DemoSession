@@ -62,11 +62,13 @@ Returns a JSON response with a greeting message.
 ```json
 {
     "message": "Hello from test route",
-    "timestamp": "2026-01-17T16:30:00.000Z",
+    "timestamp": "2024-01-17T16:30:00.000Z",
     "source": "Azure Session Pool",
+    "session": "create-route-1768667510",
     "status": "success"
 }
 ```
+*Note: The timestamp is generated dynamically using the current date/time.*
 
 ### POST /test
 Echoes back the request body.
@@ -75,4 +77,4 @@ Echoes back the request body.
 **Response:** The received data plus metadata
 
 ---
-*Route created via Azure Session Pool on 2026-01-17*
+*Route created via Azure Session Pool on 2024-01-17*
