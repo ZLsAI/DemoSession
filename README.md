@@ -16,7 +16,7 @@ A simple React application demonstrating basic setup with webpack and babel.
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher)
+- Node.js (v18 or higher)
 - npm
 
 ### Installation

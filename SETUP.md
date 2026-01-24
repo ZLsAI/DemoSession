@@ -4,10 +4,10 @@
 Before setting up the DemoSession project, ensure you have the following installed:
 
 ### Required Software
-- **Node.js**: Version 14.x or higher (recommended: latest LTS version)
+- **Node.js**: Version 18.x or higher (recommended: latest LTS version)
   - Check version: `node --version`
   - Download from: https://nodejs.org/
-- **npm**: Comes with Node.js (version 6.x or higher)
+- **npm**: Comes with Node.js (version 8.x or higher)
   - Check version: `npm --version`
 - **Git**: For version control
   - Check version: `git --version`
