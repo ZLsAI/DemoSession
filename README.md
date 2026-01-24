@@ -62,13 +62,13 @@ Returns a JSON response with a greeting message.
 ```json
 {
     "message": "Hello from test route",
-    "timestamp": "2024-01-17T16:30:00.000Z",
+    "timestamp": "<current ISO 8601 timestamp>",
     "source": "Azure Session Pool",
     "session": "create-route-1768667510",
     "status": "success"
 }
 ```
-*Note: The timestamp is generated dynamically using the current date/time.*
+*Note: The timestamp is generated dynamically using `new Date().toISOString()` and reflects the current date/time when the request is made.*
 
 ### POST /test
 Echoes back the request body.
