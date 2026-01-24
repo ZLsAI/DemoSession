@@ -2,6 +2,11 @@
 
 A simple React application demonstrating basic setup with webpack and babel.
 
+## 📚 Documentation
+- **[PROJECT_SCOPE.md](PROJECT_SCOPE.md)** - Project objectives, scope, and architecture
+- **[SETUP.md](SETUP.md)** - Detailed setup and installation instructions
+- **[TASKS.md](TASKS.md)** - Task tracking and project roadmap
+
 ## Features
 - React 19.x
 - Webpack for bundling
@@ -38,10 +43,14 @@ DemoSession/
 │   └── index.html   # HTML template
 ├── src/             # React source files
 │   ├── App.js       # Main App component
-│   └── index.js     # Entry point
+│   ├── index.js     # Entry point
+│   └── test-route.js # Test route handler
 ├── .babelrc         # Babel configuration
 ├── webpack.config.js # Webpack configuration
-└── package.json     # Dependencies and scripts
+├── package.json     # Dependencies and scripts
+├── PROJECT_SCOPE.md # Project scope and objectives
+├── SETUP.md         # Setup instructions
+└── TASKS.md         # Task tracking
 ```
 
 ## API Routes
