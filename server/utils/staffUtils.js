@@ -9,7 +9,11 @@ function isStaffAvailable(staff, date = new Date()) {
     return false;
   }
 
-  const dayName = date.toLocaleDateString('en-US', { weekday: 'lowercase' });
+  // Get day name in lowercase (e.g., 'monday', 'tuesday')
+  const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  const dayIndex = date.getDay();
+  const dayName = dayNames[dayIndex];
+  
   return staff.availability[dayName]?.available || false;
 }
 
