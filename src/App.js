@@ -11,7 +11,7 @@ function App() {
       flexDirection: 'column',
       backgroundColor: '#f0f0f0'
     }}>
-      <h1 style={{ color: '#333', marginBottom: '20px' }}>Welcome to Simple React App</h1>
+      <h1 data-testid="app-heading" style={{ color: '#333', marginBottom: '20px' }}>Welcome to Simple React App</h1>
       <p style={{ color: '#666', fontSize: '18px' }}>This is a basic React application!</p>
     </div>
   );
