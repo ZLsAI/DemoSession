@@ -7,6 +7,11 @@ const {
   parseDateRange
 } = require('../utils/dateUtils');
 
+// Helper to get the appropriate data store
+function getDataStore(req) {
+  return req.app.locals.inMemoryStore || Appointment;
+}
+
 /**
  * GET /api/appointments
  * Get all appointments with optional filters
@@ -15,6 +20,7 @@ const {
 router.get('/', async (req, res) => {
   try {
     const { startDate, endDate, patientId, doctorName, status } = req.query;
+    const dataStore = getDataStore(req);
     
     // Build query object
     const query = {};
@@ -42,7 +48,11 @@ router.get('/', async (req, res) => {
       query.status = status;
     }
     
-    const appointments = await Appointment.find(query).sort({ appointmentDate: 1, appointmentTime: 1 });
+    // Execute query with sort
+    const queryResult = await dataStore.find(query);
+    const appointments = queryResult.sort ? 
+      await queryResult.sort({ appointmentDate: 1, appointmentTime: 1 }) : 
+      queryResult;
     
     res.json({
       success: true,
@@ -64,7 +74,8 @@ router.get('/', async (req, res) => {
  */
 router.get('/:id', async (req, res) => {
   try {
-    const appointment = await Appointment.findById(req.params.id);
+    const dataStore = getDataStore(req);
+    const appointment = await dataStore.findById(req.params.id);
     
     if (!appointment) {
       return res.status(404).json({
@@ -95,6 +106,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const appointmentData = req.body;
+    const dataStore = getDataStore(req);
     
     // Validate future date/time for new appointments
     if (!validateFutureDateTime(
@@ -110,12 +122,16 @@ router.post('/', async (req, res) => {
     }
     
     // Check for conflicts with existing appointments
-    const existingAppointments = await Appointment.find({
+    const existingAppointments = await dataStore.find({
       doctorName: appointmentData.doctorName,
       status: { $ne: 'cancelled' }
     });
     
-    if (checkAppointmentConflict(existingAppointments, appointmentData)) {
+    // Get the array of appointments (handle both Mongoose and in-memory)
+    const apptArray = Array.isArray(existingAppointments) ? existingAppointments : 
+                      (existingAppointments.sort ? await existingAppointments.sort({}) : []);
+    
+    if (checkAppointmentConflict(apptArray, appointmentData)) {
       return res.status(409).json({
         success: false,
         message: 'Appointment conflict detected',
@@ -124,8 +140,13 @@ router.post('/', async (req, res) => {
     }
     
     // Create appointment
-    const appointment = new Appointment(appointmentData);
-    await appointment.save();
+    let appointment;
+    if (req.app.locals.inMemoryStore) {
+      appointment = await dataStore.create(appointmentData);
+    } else {
+      appointment = new Appointment(appointmentData);
+      await appointment.save();
+    }
     
     res.status(201).json({
       success: true,
@@ -158,9 +179,10 @@ router.put('/:id', async (req, res) => {
   try {
     const appointmentId = req.params.id;
     const updateData = req.body;
+    const dataStore = getDataStore(req);
     
     // Find existing appointment
-    const existingAppointment = await Appointment.findById(appointmentId);
+    const existingAppointment = await dataStore.findById(appointmentId);
     
     if (!existingAppointment) {
       return res.status(404).json({
@@ -202,12 +224,16 @@ router.put('/:id', async (req, res) => {
       }
       
       // Check for conflicts (excluding current appointment)
-      const conflictingAppointments = await Appointment.find({
+      const conflictingAppointments = await dataStore.find({
         doctorName: appointmentToCheck.doctorName,
         status: { $ne: 'cancelled' }
       });
       
-      if (checkAppointmentConflict(conflictingAppointments, appointmentToCheck, appointmentId)) {
+      // Get the array of appointments (handle both Mongoose and in-memory)
+      const apptArray = Array.isArray(conflictingAppointments) ? conflictingAppointments : 
+                        (conflictingAppointments.sort ? await conflictingAppointments.sort({}) : []);
+      
+      if (checkAppointmentConflict(apptArray, appointmentToCheck, appointmentId)) {
         return res.status(409).json({
           success: false,
           message: 'Appointment conflict detected',
@@ -217,7 +243,7 @@ router.put('/:id', async (req, res) => {
     }
     
     // Update appointment
-    const updatedAppointment = await Appointment.findByIdAndUpdate(
+    const updatedAppointment = await dataStore.findByIdAndUpdate(
       appointmentId,
       updateData,
       { new: true, runValidators: true }
@@ -252,7 +278,8 @@ router.put('/:id', async (req, res) => {
  */
 router.delete('/:id', async (req, res) => {
   try {
-    const appointment = await Appointment.findByIdAndUpdate(
+    const dataStore = getDataStore(req);
+    const appointment = await dataStore.findByIdAndUpdate(
       req.params.id,
       { status: 'cancelled' },
       { new: true }

@@ -1,15 +1,20 @@
 const mongoose = require('mongoose');
+const InMemoryAppointmentStore = require('../utils/inMemoryStore');
 
-// In-memory storage for when MongoDB is not available
-const inMemoryStorage = new Map();
+let inMemoryStore = null;
 
 const connectDatabase = async () => {
   const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URL;
   
   if (!mongoUri) {
     console.log('⚠️  MongoDB URI not provided. Using in-memory storage.');
+    console.log('   Data will be lost when server stops.');
     console.log('   Set MONGODB_URI or MONGO_URL environment variable to use MongoDB.');
-    return { useInMemory: true };
+    
+    // Initialize in-memory store
+    inMemoryStore = new InMemoryAppointmentStore();
+    
+    return { useInMemory: true, inMemoryStore };
   }
 
   try {
@@ -18,12 +23,26 @@ const connectDatabase = async () => {
       useUnifiedTopology: true,
     });
     console.log('✅ MongoDB connected successfully');
-    return { useInMemory: false };
+    return { useInMemory: false, inMemoryStore: null };
   } catch (error) {
     console.error('❌ MongoDB connection failed:', error.message);
     console.log('⚠️  Falling back to in-memory storage');
-    return { useInMemory: true };
+    
+    // Initialize in-memory store as fallback
+    inMemoryStore = new InMemoryAppointmentStore();
+    
+    return { useInMemory: true, inMemoryStore };
   }
 };
 
-module.exports = { connectDatabase, inMemoryStorage };
+// Cleanup function for graceful shutdown
+const disconnectDatabase = async () => {
+  if (mongoose.connection.readyState !== 0) {
+    await mongoose.disconnect();
+  }
+  if (inMemoryStore) {
+    console.log('In-memory storage cleared');
+  }
+};
+
+module.exports = { connectDatabase, disconnectDatabase };

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { connectDatabase } = require('./config/database');
+const { connectDatabase, disconnectDatabase } = require('./config/database');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,6 +15,10 @@ app.use(express.json());
 // Connect to database
 connectDatabase().then((dbConfig) => {
   app.locals.useInMemory = dbConfig.useInMemory;
+  app.locals.inMemoryStore = dbConfig.inMemoryStore;
+}).catch((error) => {
+  console.error('Failed to connect to database:', error);
+  process.exit(1);
 });
 
 // API Routes
@@ -51,10 +55,27 @@ app.use((req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📍 API available at http://localhost:${PORT}/api`);
   console.log(`🏥 Appointments endpoint: http://localhost:${PORT}/api/appointments`);
+});
+
+// Graceful shutdown
+process.on('SIGTERM', async () => {
+  console.log('SIGTERM received, shutting down gracefully...');
+  server.close(async () => {
+    await disconnectDatabase();
+    process.exit(0);
+  });
+});
+
+process.on('SIGINT', async () => {
+  console.log('SIGINT received, shutting down gracefully...');
+  server.close(async () => {
+    await disconnectDatabase();
+    process.exit(0);
+  });
 });
 
 module.exports = app;
