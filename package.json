@@ -18,9 +18,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-rate-limit": "^8.2.1",
     "mongoose": "^7.6.0",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "validator": "^13.15.26"
   },
   "devDependencies": {
     "@babel/core": "^7.28.6",

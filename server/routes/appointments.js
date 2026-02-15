@@ -6,6 +6,10 @@ const {
   validateFutureDateTime,
   parseDateRange
 } = require('../utils/dateUtils');
+const {
+  sanitizeQuery,
+  sanitizeAppointmentData
+} = require('../utils/sanitize');
 
 // Helper to get the appropriate data store
 function getDataStore(req) {
@@ -19,7 +23,9 @@ function getDataStore(req) {
  */
 router.get('/', async (req, res) => {
   try {
-    const { startDate, endDate, patientId, doctorName, status } = req.query;
+    // Sanitize query parameters to prevent injection attacks
+    const sanitizedQuery = sanitizeQuery(req.query);
+    const { startDate, endDate, patientId, doctorName, status } = sanitizedQuery;
     const dataStore = getDataStore(req);
     
     // Build query object
@@ -33,7 +39,7 @@ router.get('/', async (req, res) => {
       }
     }
     
-    // Patient filter
+    // Patient filter (note: in production, consider using POST for sensitive data)
     if (patientId) {
       query.patientId = patientId;
     }
@@ -105,7 +111,8 @@ router.get('/:id', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   try {
-    const appointmentData = req.body;
+    // Sanitize input data
+    const appointmentData = sanitizeAppointmentData(req.body);
     const dataStore = getDataStore(req);
     
     // Validate future date/time for new appointments
@@ -178,7 +185,8 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const appointmentId = req.params.id;
-    const updateData = req.body;
+    // Sanitize update data
+    const updateData = sanitizeAppointmentData(req.body);
     const dataStore = getDataStore(req);
     
     // Find existing appointment
