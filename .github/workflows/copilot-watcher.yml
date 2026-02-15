@@ -115,17 +115,26 @@ jobs:
             const taskId = taskIdMatch ? taskIdMatch[1] : '';
 
             // ── Count task progress ──────────────────────────────
-            // Total tasks = issues with 'copilot-task' label
+            // Total tasks = OPEN issues with 'copilot-task' label
+            // IMPORTANT: state must be 'open' to only count current session
             const issues = await github.rest.issues.listForRepo({
               owner, repo,
               labels: 'copilot-task',
-              state: 'all',
+              state: 'open',
               per_page: 100
             });
 
-            // Filter to actual issues (not PRs that also show up)
-            const taskIssues = issues.data.filter(i => !i.pull_request);
+            // Filter: exclude PRs (GitHub mixes them) AND exclude parent
+            // group issues (title contains "Issue Group") which are just
+            // organizational wrappers, not actual tasks for Copilot
+            const taskIssues = issues.data.filter(i =>
+              !i.pull_request &&
+              !i.title.includes('Issue Group')
+            );
             const totalTasks = taskIssues.length;
+
+            console.log(`\n━━━ Task Issues (${taskIssues.length} real tasks) ━━━`);
+            taskIssues.forEach(i => console.log(`  #${i.number}: ${i.title}`));
 
             // Completed = Copilot draft PRs (each represents a finished task)
             const allPrs = await github.rest.pulls.list({
@@ -138,9 +147,13 @@ jobs:
             );
             const completedTasks = copilotPrs.length;
 
+            console.log(`\n━━━ Copilot PRs (${copilotPrs.length} completed) ━━━`);
+            copilotPrs.forEach(p => console.log(`  #${p.number}: ${p.head.ref}`));
+
             console.log(`\n━━━ Progress ━━━`);
-            console.log(`  Completed: ${completedTasks} / ${totalTasks}`);
-            console.log(`  Branches:  ${copilotPrs.map(p => p.head.ref).join(', ')}`);
+            console.log(`  Total tasks:  ${totalTasks} (from ${issues.data.length} issues, ${issues.data.filter(i => i.title.includes('Issue Group')).length} group issues filtered out)`);
+            console.log(`  Completed:    ${completedTasks} / ${totalTasks}`);
+            console.log(`  Branches:     ${copilotPrs.map(p => p.head.ref).join(', ')}`);
 
             const allDone = completedTasks >= totalTasks && totalTasks > 0;
             console.log(`  All done:  ${allDone}`);
