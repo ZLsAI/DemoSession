@@ -105,4 +105,4 @@ The backend supports MongoDB but will gracefully fall back to in-memory storage 
 ## Notes
 - Frontend runs on port 3000 (configurable in webpack.config.js)
 - Backend runs on port 5000 (configurable via PORT environment variable)
-- CORS is configured to allow requests from localhost:8080
+- CORS is configured to allow requests from localhost:3000 (configurable via FRONTEND_URL environment variable)

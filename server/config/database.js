@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-// In-memory storage fallback
+// In-memory storage fallback for use when MongoDB is not available
+// This Map can be used by routes/models to store data temporarily
 let inMemoryStorage = new Map();
 
 const connectDatabase = async () => {
