@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Patient, InMemoryPatient } = require('../models/Patient');
-const { validatePatientData } = require('../utils/validation');
+const { validatePatientData, isValidEmail, isValidDateOfBirth } = require('../utils/validation');
 const { isUsingInMemory, getInMemoryStorage } = require('../config/database');
 
 /**
@@ -182,8 +182,6 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params;
 
     // Validate patient data (excluding required fields check for updates)
-    const { isValidEmail, isValidDateOfBirth } = require('../utils/validation');
-    
     if (req.body.email && !isValidEmail(req.body.email)) {
       return res.status(400).json({
         success: false,
