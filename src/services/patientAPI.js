@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+const API_BASE_URL = typeof process !== 'undefined' && process.env?.REACT_APP_API_URL 
+  ? process.env.REACT_APP_API_URL 
+  : 'http://localhost:8080/api';
 
 export const patientAPI = {
   getAll: (params = {}) => axios.get(`${API_BASE_URL}/patients`, { params }),
