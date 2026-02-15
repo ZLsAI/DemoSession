@@ -9,8 +9,24 @@ function PatientList({ onSelectPatient, onAddNew }) {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const fetchPatients = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await patientAPI.getAll();
+      setPatients(response.data || []);
+      setFilteredPatients(response.data || []);
+    } catch (err) {
+      setError(err.message || 'Failed to load patients');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchPatients();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -28,21 +44,6 @@ function PatientList({ onSelectPatient, onAddNew }) {
       setFilteredPatients(patients);
     }
   }, [searchTerm, patients]);
-
-  const fetchPatients = async () => {
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const response = await patientAPI.getAll();
-      setPatients(response.data || []);
-      setFilteredPatients(response.data || []);
-    } catch (err) {
-      setError(err.message || 'Failed to load patients');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);

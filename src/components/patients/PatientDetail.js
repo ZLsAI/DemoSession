@@ -8,12 +8,6 @@ function PatientDetail({ patientId, onEdit, onClose, onDeleted }) {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  useEffect(() => {
-    if (patientId) {
-      fetchPatient();
-    }
-  }, [patientId]);
-
   const fetchPatient = async () => {
     setLoading(true);
     setError(null);
@@ -27,6 +21,13 @@ function PatientDetail({ patientId, onEdit, onClose, onDeleted }) {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (patientId) {
+      fetchPatient();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [patientId]);
 
   const handleDelete = async () => {
     setDeleting(true);
