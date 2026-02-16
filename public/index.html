@@ -3,9 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple React App</title>
+  <meta name="description" content="A simple counter demonstration component">
+  <title>Counter Demo - DemoSession</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="root"></div>
+  <header>
+    <h1>Counter Demonstration</h1>
+  </header>
+  
+  <main>
+    <section class="counter-section">
+      <h2>Interactive Counter</h2>
+      <p>Use the buttons below to increment or decrement the counter value.</p>
+      
+      <div class="counter-display">
+        <label for="counter-value">Current Count:</label>
+        <output id="counter-value" name="counter-value" aria-live="polite">0</output>
+      </div>
+      
+      <div class="counter-controls">
+        <button 
+          type="button" 
+          id="decrement-btn" 
+          class="counter-btn decrement-btn"
+          aria-label="Decrement counter">
+          -
+        </button>
+        <button 
+          type="button" 
+          id="increment-btn" 
+          class="counter-btn increment-btn"
+          aria-label="Increment counter">
+          +
+        </button>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2026 DemoSession - A simple counter demonstration</p>
+  </footer>
+  
+  <script src="counter.js"></script>
 </body>
 </html>
