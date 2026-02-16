@@ -28,6 +28,7 @@ interface CounterInput {
  */
 export class CounterAgent extends BaseAgent {
   private value: number;
+  private readonly initialValue: number;
 
   /**
    * Creates a new CounterAgent instance
@@ -35,7 +36,8 @@ export class CounterAgent extends BaseAgent {
    */
   constructor(config: CounterAgentConfig) {
     super(config);
-    this.value = config.initialValue ?? 0;
+    this.initialValue = config.initialValue ?? 0;
+    this.value = this.initialValue;
     this.logger.info(`Counter initialized with value: ${this.value}`);
   }
 
@@ -68,12 +70,12 @@ export class CounterAgent extends BaseAgent {
   }
 
   /**
-   * Resets the counter to 0
-   * @returns The reset value (0)
+   * Resets the counter to its initial value
+   * @returns The reset value
    */
   reset(): number {
-    this.value = 0;
-    this.logger.info('Counter reset to: 0');
+    this.value = this.initialValue;
+    this.logger.info(`Counter reset to: ${this.initialValue}`);
     return this.value;
   }
 
