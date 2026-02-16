@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePatients } from '../context/PatientContext';
 import PatientTableRow from './PatientTableRow';
-import { filterBySearch, filterByDateRange, sortPatients } from '../utils/filterUtils';
+import { filterBySearch, filterByDateRange, sortPatients, formatDate } from '../utils/filterUtils';
 import './PatientList.css';
 
 const PatientList = () => {
@@ -219,7 +219,7 @@ const PatientList = () => {
             </div>
             <div className="card-body">
               <div className="card-field">
-                <strong>DOB:</strong> {patient.dateOfBirth}
+                <strong>DOB:</strong> {formatDate(patient.dateOfBirth)}
               </div>
               <div className="card-field">
                 <strong>Phone:</strong> {patient.phone}
@@ -228,7 +228,7 @@ const PatientList = () => {
                 <strong>Email:</strong> {patient.email}
               </div>
               <div className="card-field">
-                <strong>Registered:</strong> {patient.registrationDate}
+                <strong>Registered:</strong> {formatDate(patient.registrationDate)}
               </div>
             </div>
             <div className="card-actions">
