@@ -5,6 +5,10 @@ node_modules/
 dist/
 build/
 
+# Test results
+test-results/
+playwright-report/
+
 # Environment variables
 .env
 .env.local
