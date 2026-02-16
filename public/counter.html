@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counter Demo</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .counter-container {
+      background: white;
+      padding: 3rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      text-align: center;
+      min-width: 300px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+    .counter-display {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #667eea;
+      margin: 2rem 0;
+      padding: 1rem;
+      background: #f7f7f7;
+      border-radius: 0.5rem;
+    }
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: white;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    .increment-btn {
+      background: #48bb78;
+    }
+    .increment-btn:hover {
+      background: #38a169;
+    }
+    .decrement-btn {
+      background: #f56565;
+    }
+    .decrement-btn:hover {
+      background: #e53e3e;
+    }
+    .reset-btn {
+      background: #4299e1;
+    }
+    .reset-btn:hover {
+      background: #3182ce;
+    }
+    .error-message {
+      color: #e53e3e;
+      margin-top: 1rem;
+      min-height: 1.5rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="counter-container">
+    <h1>Counter Demo</h1>
+    <div class="counter-display" id="counter-value" data-testid="counter-value" aria-live="polite">0</div>
+    <div class="button-group">
+      <button class="decrement-btn" id="decrement-btn" data-testid="decrement-btn" aria-label="Decrement counter">-</button>
+      <button class="reset-btn" id="reset-btn" data-testid="reset-btn" aria-label="Reset counter">Reset</button>
+      <button class="increment-btn" id="increment-btn" data-testid="increment-btn" aria-label="Increment counter">+</button>
+    </div>
+    <div class="error-message" id="error-message" data-testid="error-message" aria-live="assertive"></div>
+  </div>
+
+  <script type="module">
+    // Simple counter implementation for testing
+    let counterValue = 0;
+
+    const counterDisplay = document.getElementById('counter-value');
+    const errorMessage = document.getElementById('error-message');
+    const incrementBtn = document.getElementById('increment-btn');
+    const decrementBtn = document.getElementById('decrement-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function updateDisplay() {
+      counterDisplay.textContent = counterValue;
+      errorMessage.textContent = '';
+    }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+    }
+
+    incrementBtn.addEventListener('click', () => {
+      try {
+        counterValue++;
+        updateDisplay();
+      } catch (error) {
+        showError('Error incrementing counter');
+      }
+    });
+
+    decrementBtn.addEventListener('click', () => {
+      try {
+        counterValue--;
+        updateDisplay();
+      } catch (error) {
+        showError('Error decrementing counter');
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      try {
+        counterValue = 0;
+        updateDisplay();
+      } catch (error) {
+        showError('Error resetting counter');
+      }
+    });
+
+    // Keyboard support
+    document.addEventListener('keydown', (event) => {
+      if (event.key === '+' || event.key === '=') {
+        incrementBtn.click();
+      } else if (event.key === '-') {
+        decrementBtn.click();
+      } else if (event.key === 'r' || event.key === 'R') {
+        resetBtn.click();
+      }
+    });
+  </script>
+</body>
+</html>
