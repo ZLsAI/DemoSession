@@ -82,12 +82,14 @@ export const PatientProvider = ({ children }) => {
   /**
    * Removes a patient by ID
    * @param {string} id - Patient ID
-   * @returns {boolean} - True if patient was removed, false otherwise
+   * @returns {boolean} - True if patient was found and removed, false otherwise
    */
   const removePatient = (id) => {
-    const initialLength = patients.length;
-    setPatients((prevPatients) => prevPatients.filter((p) => p.id !== id));
-    return patients.length < initialLength;
+    const found = patients.some((p) => p.id === id);
+    if (found) {
+      setPatients((prevPatients) => prevPatients.filter((p) => p.id !== id));
+    }
+    return found;
   };
 
   const value = {

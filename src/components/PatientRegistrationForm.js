@@ -73,7 +73,11 @@ const PatientRegistrationForm = () => {
         error = validatePhone(value);
         break;
       case 'medicalRecordNumber':
-        error = validateMRN(value);
+        // Only validate MRN on blur if user has entered a value
+        // since leaving it blank is valid (auto-generates on submit)
+        if (value && value.trim().length > 0) {
+          error = validateMRN(value);
+        }
         break;
       case 'dateOfBirth':
         error = validateDateOfBirth(value);
@@ -187,9 +191,9 @@ const PatientRegistrationForm = () => {
   };
 
   /**
-   * Handles form reset
+   * Resets the form to initial state
    */
-  const handleReset = () => {
+  const resetForm = () => {
     setFormData({
       fullName: '',
       dateOfBirth: '',
@@ -202,18 +206,17 @@ const PatientRegistrationForm = () => {
   };
 
   /**
+   * Handles form reset
+   */
+  const handleReset = () => {
+    resetForm();
+  };
+
+  /**
    * Handles "Register Another Patient" action
    */
   const handleRegisterAnother = () => {
-    setSubmitFeedback(null);
-    setFormData({
-      fullName: '',
-      dateOfBirth: '',
-      phoneNumber: '',
-      email: '',
-      medicalRecordNumber: '',
-    });
-    setErrors({});
+    resetForm();
   };
 
   return (
