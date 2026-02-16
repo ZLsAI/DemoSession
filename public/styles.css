@@ -1,0 +1,287 @@
+/* CSS Variables for consistent theming */
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-active: #3730a3;
+  --secondary-color: #10b981;
+  --danger-color: #ef4444;
+  --danger-hover: #dc2626;
+  --danger-active: #b91c1c;
+  --bg-color: #f9fafb;
+  --card-bg: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Global reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Main container */
+.counter-container {
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  padding: 60px 40px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.counter-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Title styling */
+.counter-title {
+  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  letter-spacing: -0.5px;
+}
+
+/* Counter display */
+.counter-display {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  font-size: 5rem;
+  font-weight: 800;
+  padding: 40px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  min-width: 200px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.counter-display::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+}
+
+.counter-display:hover::before {
+  left: 100%;
+}
+
+.counter-display.animate {
+  animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Button container */
+.button-group {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Button base styles */
+.counter-button {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 18px 40px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+  min-width: 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+.counter-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.counter-button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Increment button */
+.increment-button {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.increment-button:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.increment-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow);
+}
+
+.increment-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+}
+
+/* Decrement button */
+.decrement-button {
+  background: var(--danger-color);
+  color: white;
+}
+
+.decrement-button:hover {
+  background: var(--danger-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.decrement-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow);
+}
+
+.decrement-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+
+/* Disabled state */
+.counter-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.counter-button:disabled:hover {
+  transform: none;
+  box-shadow: var(--shadow);
+}
+
+/* Keyboard navigation styling */
+.counter-button:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .counter-container {
+    padding: 40px 30px;
+  }
+
+  .counter-title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+
+  .counter-display {
+    font-size: 4rem;
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .counter-button {
+    width: 100%;
+    padding: 15px 30px;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .counter-container {
+    padding: 30px 20px;
+  }
+
+  .counter-title {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+
+  .counter-display {
+    font-size: 3rem;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .counter-button {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Accessibility - High contrast mode support */
+@media (prefers-contrast: high) {
+  .counter-display {
+    border: 2px solid var(--text-primary);
+  }
+
+  .counter-button {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Accessibility - Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
