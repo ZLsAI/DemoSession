@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect, useMemo } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useMemo, useCallback } from 'react';
 import { savePatients, loadPatients } from '../utils/storage';
 import { getSampleData } from '../utils/sampleData';
 
@@ -80,34 +80,34 @@ export const PatientProvider = ({ children }) => {
    * Add a new patient
    * @param {Object} patient - Patient object to add
    */
-  const addPatient = (patient) => {
+  const addPatient = useCallback((patient) => {
     dispatch({ type: ActionTypes.ADD_PATIENT, payload: patient });
-  };
+  }, []);
 
   /**
    * Update an existing patient
    * @param {Object} patient - Updated patient object
    */
-  const updatePatient = (patient) => {
+  const updatePatient = useCallback((patient) => {
     dispatch({ type: ActionTypes.UPDATE_PATIENT, payload: patient });
-  };
+  }, []);
 
   /**
    * Delete a patient by ID
    * @param {string} patientId - ID of patient to delete
    */
-  const deletePatient = (patientId) => {
+  const deletePatient = useCallback((patientId) => {
     dispatch({ type: ActionTypes.DELETE_PATIENT, payload: patientId });
-  };
+  }, []);
 
   /**
    * Get a patient by ID
    * @param {string} patientId - ID of patient to retrieve
    * @returns {Object|undefined} - Patient object or undefined if not found
    */
-  const getPatientById = (patientId) => {
+  const getPatientById = useCallback((patientId) => {
     return state.patients.find(patient => patient.id === patientId);
-  };
+  }, [state.patients]);
 
   // Memoize the context value to prevent unnecessary re-renders
   const contextValue = useMemo(
@@ -118,7 +118,7 @@ export const PatientProvider = ({ children }) => {
       deletePatient,
       getPatientById,
     }),
-    [state.patients]
+    [state.patients, addPatient, updatePatient, deletePatient, getPatientById]
   );
 
   return (
