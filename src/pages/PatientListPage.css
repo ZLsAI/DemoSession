@@ -1,0 +1,159 @@
+.patient-list-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.page-header h1 {
+  margin: 0 0 5px 0;
+  color: #333;
+  font-size: 32px;
+}
+
+.page-subtitle {
+  margin: 0;
+  color: #666;
+  font-size: 16px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: #4CAF50;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #45a049;
+}
+
+.no-patients {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.no-patients p {
+  color: #999;
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.patients-table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.patients-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.patients-table thead {
+  background: #f5f5f5;
+}
+
+.patients-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: #666;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.patients-table td {
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+  font-size: 14px;
+}
+
+.patients-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.mrn-cell {
+  font-weight: 600;
+  color: #2196F3;
+}
+
+.name-cell {
+  font-weight: 500;
+}
+
+.visits-cell {
+  text-align: center;
+  font-weight: 600;
+}
+
+.btn-link {
+  color: #2196F3;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.btn-link:hover {
+  color: #0b7dda;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .patient-list-page {
+    padding: 15px;
+  }
+
+  .page-header {
+    flex-direction: column;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  /* Make table scrollable on mobile */
+  .patients-table-container {
+    overflow-x: auto;
+  }
+
+  .patients-table {
+    min-width: 700px;
+  }
+
+  .patients-table th,
+  .patients-table td {
+    padding: 10px;
+    font-size: 12px;
+  }
+}

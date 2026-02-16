@@ -1,0 +1,66 @@
+.visit-history-item {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: box-shadow 0.2s;
+}
+
+.visit-history-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.visit-date {
+  margin-bottom: 15px;
+}
+
+.visit-date-badge {
+  display: inline-block;
+  background: #2196F3;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.visit-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.visit-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.visit-row strong {
+  color: #666;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.visit-row span {
+  color: #333;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .visit-history-item {
+    padding: 15px;
+  }
+
+  .visit-date-badge {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .visit-row span {
+    font-size: 14px;
+  }
+}
