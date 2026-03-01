@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTheme } from './ThemeContext';
 
 const themes = {
@@ -29,6 +29,7 @@ const themes = {
 function App() {
   const { isDarkMode, toggleTheme } = useTheme();
   const theme = isDarkMode ? themes.dark : themes.light;
+  const [count, setCount] = useState(0);
 
   return (
     <div style={{
@@ -66,6 +67,33 @@ function App() {
         }}>
           This is a basic React application!
         </p>
+        <div style={{ marginBottom: '24px' }}>
+          <p style={{
+            color: theme.heading,
+            fontSize: '32px',
+            fontWeight: 'bold',
+            margin: '0 0 12px 0',
+            transition: 'color 0.3s ease',
+          }} data-testid="counter-value">
+            {count}
+          </p>
+          <button
+            onClick={() => setCount(c => c + 1)}
+            data-testid="increment-button"
+            style={{
+              backgroundColor: theme.button.background,
+              color: theme.button.color,
+              border: theme.button.border,
+              padding: '10px 24px',
+              borderRadius: '6px',
+              fontSize: '16px',
+              cursor: 'pointer',
+              transition: 'background-color 0.3s ease, color 0.3s ease, border 0.3s ease',
+            }}
+          >
+            +1
+          </button>
+        </div>
         <button
           onClick={toggleTheme}
           style={{
