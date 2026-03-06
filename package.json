@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "A simple React application",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:ts": "tsc",
+    "test:e2e": "playwright test",
+    "test": "npm run build:ts && npm run test:e2e"
   },
   "keywords": [],
   "author": "",
@@ -19,8 +22,11 @@
     "@babel/core": "^7.28.6",
     "@babel/preset-env": "^7.28.6",
     "@babel/preset-react": "^7.28.5",
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.2.3",
     "babel-loader": "^10.0.0",
     "html-webpack-plugin": "^5.6.5",
+    "typescript": "^5.9.3",
     "webpack": "^5.104.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.3"
