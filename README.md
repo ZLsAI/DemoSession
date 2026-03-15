@@ -34,14 +34,15 @@ The production build will be created in the `dist` directory.
 ## Project Structure
 ```
 DemoSession/
-├── public/          # Static files
-│   └── index.html   # HTML template
-├── src/             # React source files
-│   ├── App.js       # Main App component
-│   └── index.js     # Entry point
-├── .babelrc         # Babel configuration
-├── webpack.config.js # Webpack configuration
-└── package.json     # Dependencies and scripts
+├── public/              # Static files
+│   └── index.html       # HTML template
+├── src/                 # React source files
+│   ├── App.js           # Main App component
+│   ├── index.js         # Entry point
+│   └── test-route.js    # Express /test route definition
+├── .babelrc             # Babel configuration
+├── webpack.config.js    # Webpack configuration
+└── package.json         # Dependencies and scripts
 ```
 
 ## API Routes
