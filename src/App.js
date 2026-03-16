@@ -1,19 +1,24 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { TodoProvider } from './TodoContext';
+import NavBar from './components/NavBar';
+import TodoList from './pages/TodoList';
+import Counter from './pages/Counter';
 
 function App() {
   return (
-    <div style={{ 
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'center', 
-      height: '100vh',
-      fontFamily: 'Arial, sans-serif',
-      flexDirection: 'column',
-      backgroundColor: '#f0f0f0'
-    }}>
-      <h1 style={{ color: '#333', marginBottom: '20px' }}>Welcome to Simple React App</h1>
-      <p style={{ color: '#666', fontSize: '18px' }}>This is a basic React application!</p>
-    </div>
+    <TodoProvider>
+      <Router>
+        <div style={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<TodoList />} />
+            <Route path="/counter" element={<Counter />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
+      </Router>
+    </TodoProvider>
   );
 }
 
