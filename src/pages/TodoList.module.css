@@ -1,0 +1,181 @@
+.container {
+  max-width: 640px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0 0 0.4rem;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fff;
+  color: #333;
+}
+
+.input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+.input::placeholder {
+  color: #bbb;
+}
+
+.addButton {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.addButton:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.addButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #aaa;
+  background: #fafafa;
+  border-radius: 12px;
+  border: 2px dashed #e8e8e8;
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+  border: 1px solid #f0f0f0;
+  transition: box-shadow 0.2s, opacity 0.2s;
+}
+
+.item:hover {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.itemCompleted {
+  opacity: 0.6;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #d0d0d0;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s, background 0.2s;
+  padding: 0;
+}
+
+.checkbox:hover {
+  border-color: #667eea;
+}
+
+.checkboxChecked {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: transparent;
+}
+
+.checkmark {
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.itemText {
+  flex: 1;
+  font-size: 1rem;
+  color: #333;
+  word-break: break-word;
+}
+
+.itemCompleted .itemText {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.deleteButton {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #ccc;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+  padding: 0;
+}
+
+.deleteButton:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
