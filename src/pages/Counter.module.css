@@ -1,0 +1,249 @@
+.container {
+  max-width: 720px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0 0 0.4rem;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #888;
+  margin: 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.statCard {
+  padding: 1.5rem 1rem;
+  border-radius: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.statTotal {
+  background: linear-gradient(135deg, #667eea22, #764ba222);
+  border: 1px solid #667eea44;
+}
+
+.statCompleted {
+  background: linear-gradient(135deg, #10b98122, #34d39922);
+  border: 1px solid #10b98144;
+}
+
+.statPending {
+  background: linear-gradient(135deg, #f59e0b22, #fbbf2422);
+  border: 1px solid #f59e0b44;
+}
+
+.statValue {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #2d2d2d;
+}
+
+.statTotal .statValue {
+  color: #667eea;
+}
+
+.statCompleted .statValue {
+  color: #10b981;
+}
+
+.statPending .statValue {
+  color: #f59e0b;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.progressSection {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+  border: 1px solid #f0f0f0;
+  margin-bottom: 1.75rem;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.6rem;
+}
+
+.progressBar {
+  height: 10px;
+  background: #f0f0f0;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.section {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+  border: 1px solid #f0f0f0;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0 0 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+}
+
+.empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #aaa;
+}
+
+.emptyIcon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+
+.cardCompleted {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.cardPending {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.cardStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dotCompleted {
+  background: #10b981;
+}
+
+.dotPending {
+  background: #f59e0b;
+}
+
+.statusText {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  width: 68px;
+}
+
+.cardCompleted .statusText {
+  color: #10b981;
+}
+
+.cardPending .statusText {
+  color: #f59e0b;
+}
+
+.cardText {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #333;
+  margin: 0;
+  word-break: break-word;
+}
+
+.cardTextCompleted {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
