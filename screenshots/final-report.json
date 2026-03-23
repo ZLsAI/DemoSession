@@ -1,0 +1,42 @@
+{
+  "url": "http://localhost:3000",
+  "prompt": "Navigate to the Expense Tracker. Add three expenses: 1) Title='Coffee', Amount=3.50, Category=Food. 2) Title='Movie ticket', Amount=15.00, Category=Entertainment. 3) Title='Taxi', Amount=8.75, Category=Transport. Verify all three appear in the list with correct category badges and amounts. Verify the total is correctly calculated. Then delete one expense and verify the total updates correctly. Take a screenshot showing the final state.",
+  "status": "passed",
+  "actions_taken": [
+    "navigate",
+    "write_file",
+    "input",
+    "input",
+    "select_dropdown",
+    "click",
+    "replace_file",
+    "input",
+    "input",
+    "select_dropdown",
+    "click",
+    "replace_file",
+    "input",
+    "input",
+    "select_dropdown",
+    "click",
+    "replace_file",
+    "click",
+    "replace_file",
+    "done",
+    "evaluate",
+    "done"
+  ],
+  "screenshots": [
+    "/tmp/browser_use_agent_069c0fc7-968b-79d9-8000-ea034a7cc1b3_1774255225/screenshots/step_1.png",
+    "/tmp/browser_use_agent_069c0fc7-968b-79d9-8000-ea034a7cc1b3_1774255225/screenshots/step_2.png",
+    "/tmp/browser_use_agent_069c0fc7-968b-79d9-8000-ea034a7cc1b3_1774255225/screenshots/step_3.png",
+    "/tmp/browser_use_agent_069c0fc7-968b-79d9-8000-ea034a7cc1b3_1774255225/screenshots/step_4.png",
+    "/tmp/browser_use_agent_069c0fc7-968b-79d9-8000-ea034a7cc1b3_1774255225/screenshots/step_5.png",
+    "/tmp/browser_use_agent_069c0fc7-968b-79d9-8000-ea034a7cc1b3_1774255225/screenshots/step_6.png",
+    "/tmp/browser_use_agent_069c0fc7-968b-79d9-8000-ea034a7cc1b3_1774255225/screenshots/step_7.png",
+    "screenshots/01-homepage.png"
+  ],
+  "errors": [],
+  "summary": "QA Test Report for Expense Tracker:\n\n1. **Navigation**: Successfully navigated to http://localhost:3000. The page loaded correctly.\n2. **Adding Expenses**:\n   - Added 'Coffee' ($3.50, Category: Food) - Success\n   - Added 'Movie ticket' ($15.00, Category: Entertainment) - Success\n   - Added 'Taxi' ($8.75, Category: Transport) - Success\n3. **Verification of Total**: The initial total was correctly calculated as $27.25.\n4. **Deletion Test**: Deleted the 'Coffee' expense. The total updated correctly to $23.75 ($15.00 + $8.75).\n5. **Error Check**: No console errors or UI errors were observed during the testing process.\n\n**Final State**: The list contains 'Movie ticket' and 'Taxi' with a total of $23.75. All category badges and amounts are displayed correctly.\n\nAttachments:\n\ntodo.md:\n# Expense Tracker QA Test\n\n- [x] Add expense: Coffee, 3.50, Food\n- [x] Add expense: Movie ticket, 15.00, Entertainment\n- [x] Add expense: Taxi, 8.75, Transport\n- [x] Verify all expenses and total amount ($27.25)\n- [x] Delete one expense and verify total update\n- [ ] Final report\n",
+  "duration_ms": 60224
+}
