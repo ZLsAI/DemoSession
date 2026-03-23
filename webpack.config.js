@@ -32,7 +32,19 @@ module.exports = {
     },
     compress: true,
     port: 3000,
-    open: true,
+    open: false,
+    proxy: [
+      {
+        context: ['/wttr'],
+        target: 'https://wttr.in',
+        changeOrigin: true,
+        pathRewrite: { '^/wttr': '' },
+        secure: false,
+      },
+    ],
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   mode: 'development',
 };
